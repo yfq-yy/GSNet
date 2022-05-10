@@ -29,19 +29,6 @@ and the results are consistent with the paper.
 
 
 
-For proving the effectiveness of the algorithm, we experimented with several different model searches
-and get the following result.
-We use a single Tesla V100 GPU to evolve the population 50000 times.
-|    method     |    model    | search time(hours) | model score |
-| :-----------: | :---------: | :----------------: | :---------: |
-|    ZenNAS     | latency01ms |      98.4274       |   126.038   |
-|        \       | latency05ms |      22.0189       |   243.101   |
-|        \       | latency08ms |      28.5952       |   304.323   |
-|        \       | latency12ms |      44.6237       |   375.027   |
-| modify-ZenNAS | latency01ms |       64.988       |   134.896   |
-|        \       | latency05ms |      20.9895       |   245.712   |
-|        \       | latency08ms |      25.0358       |   310.629   |
-|        \       | latency12ms |       43.239       |   386.669   |
 
 ## Reproduce Paper Experiments
 
@@ -124,6 +111,8 @@ scripts/TE_NAS_cifar_params1M.sh
 scripts/Zen_NAS_cifar_params1M.sh
 
 
-## Copyright
+### Copyright
 
 Copyright 2021 ZTE corporation. All Rights Reserved.
+
+

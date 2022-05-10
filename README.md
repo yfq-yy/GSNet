@@ -122,53 +122,6 @@ scripts/Random_NAS_cifar_params1M.sh
 scripts/Syncflow_NAS_cifar_params1M.sh
 scripts/TE_NAS_cifar_params1M.sh
 scripts/Zen_NAS_cifar_params1M.sh
-```
-
-
-## Customize Your Own Search Space and Zero-Shot Proxy
-
-The masternet definition is stored in "Masternet.py".
-The masternet takes in a structure string and parses it into a PyTorch nn.Module object.
-The structure string defines the layer structure which is implemented in "PlainNet/*.py" files.
-For example, in "PlainNet/SuperResK1KXK1.py",
-we defined SuperResK1K3K1 block, which consists of multiple layers of ResNet blocks.
-To define your block, e.g. ABC_Block, first, implement "PlainNet/ABC_Block.py".
-Then in "PlainNet/\_\_init\_\_.py",  after the last line, append the following lines to register the new block definition:
-
-```python
-from PlainNet import ABC_Block
-_all_netblocks_dict_ = ABC_Block.register_netblocks_dict(_all_netblocks_dict_)
-```
-
-After the above registration call, the PlainNet module can parse your customized block from the structure string.
-
-The search space definitions are stored in SearchSpace/*.py. The important function is
-
-```python
-gen_search_space(block_list, block_id)
-```
-
-block_list is a list of super-blocks parsed by the masternet.
-block_id is the index of the block in block_list which will be replaced later by a mutated block
-This function must return a list of mutated blocks.
-
-### Direct specify search space
-
-"PlainNet/AABC_Block.py" has defined the candidate blocks,
-you can directly specify candidate blocks in the search spaces by passing parameters "--search_space_list".
-So you have two methods to specify search spaces.
-Taking ResNet-like search space as an example, you can use "--search_space SearchSpace/search_space_XXBL.py" or
-"--search_space_list PlainNet/SuperResK1KXK1.py PlainNet/SuperResKXKX.py" to specify search space. Both of them are equivalent.
-
-In scripts, when you choose to use the first method to specify search space,
-**you should also add other two parameters "--fix_initialize" and"--origin"**,
-so the algorithm will initialize with a fixed model.
-
-The zero-shot proxies are implemented in "ZeroShotProxy/*.py". The evolutionary algorithm is implemented in "evolution_search.py".
-"analyze_model.py" prints the FLOPs and model size of the given network.
-"benchmark_network_latency.py" measures the network inference latency.
-"train_image_classification.py" implements SGD gradient training
-and "ts_train_image_classification.py" implements teacher-student distillation.
 
 
 ## Copyright

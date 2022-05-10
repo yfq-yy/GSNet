@@ -1,0 +1,31 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/zen_nas/evolution_search.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--gpu", "0",
+                "--zero_shot_score", "Zen",
+                "--fix_initialize",
+                "--origin",
+                "--search_space", "${workspaceFolder}/src/zen_nas/SearchSpace/search_space_ghostshuffle.py",
+                "--budget_latency", "5e-4",
+                "--max_layers", "18",
+                "--batch_size", "64",
+                "--input_image_size", "32",
+                "--plainnet_struct_txt", "${workspaceFolder}/save_dir/GhostShuffle_cifar_0.5ms_cudacync_onelayer/init_plainnet.txt",
+                "--num_classes", "10",
+                "--evolution_max_iter", "480000",
+                "--population_size", "512",
+                "--save_dir", "${workspaceFolder}/save_dir/GhostShuffle_cifar_0.5ms_cudacync_onelayer"
+            ]
+        }
+    ]
+}

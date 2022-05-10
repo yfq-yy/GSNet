@@ -1,4 +1,4 @@
-# zen_nas
+# GSNet
 
 [![Build Status](https://dev.azure.com/Adlik/GitHub/_apis/build/status/Adlik.zen_nas?branchName=main)](https://dev.azure.com/Adlik/GitHub/_build/latest?definitionId=5&branchName=main)
 [![Bors enabled](https://bors.tech/images/badge_small.svg)](https://app.bors.tech/repositories/38905)
@@ -7,17 +7,13 @@
 ## Introduction
 
 Our based code is forked from [ZenNAS](https://github.com/idstcv/ZenNAS).
- We modify the code to make it easier to use, and according to paper
- [Zen-NAS: A Zero-Shot NAS for High-Performance Image Recognition](https://arxiv.org/abs/2102.01063),
-  we add some features that ZenNAS does not have.
-
+ We modify the code to make it suitable for UAV embedding embedded platforms.
+ 
 We mainly made the following changes:
 
-- support Horovod, PyTorch distributed training
-- code refactoring for evolutionary search, speed up searching
-- repair THCudaTensor sizes too large problem when search latency model
-
-Besides,  as some functions can not work correctly under distributed training, we provide a distributed version.
+- redesign a new lightweight search space, GhostShuffle unit(GS unit), which further reduce the params and FLOPs of network.
+- add constraints on params, FLOPs ,layers and MAC, and searches for the optimal network GSmodel-L based on the
+ZenScore scores.
 
 ## Experimental results
 

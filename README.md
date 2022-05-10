@@ -29,7 +29,6 @@ and the results are consistent with the paper.
 
 
 
-
 ## Reproduce Paper Experiments
 
 ### System Requirements
@@ -109,10 +108,9 @@ scripts/Random_NAS_cifar_params1M.sh
 scripts/Syncflow_NAS_cifar_params1M.sh
 scripts/TE_NAS_cifar_params1M.sh
 scripts/Zen_NAS_cifar_params1M.sh
-
+```
 
 ### Copyright
 
 Copyright 2021 ZTE corporation. All Rights Reserved.
-
 

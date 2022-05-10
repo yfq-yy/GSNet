@@ -19,25 +19,15 @@ ZenScore scores.
 
 We tested the modified code and verified its correctness. The results are as follows:
 
-We used apex with mixed precision to complete the training within 5 days on 8 tesla V100 GPUs,
+We used apex with mixed precision to complete the training within 5 days on 4 2080Ti GPUs,
 and the results are consistent with the paper.
 
-|              | paper model accuracy | distributed training accuracy |
-| :----------: | :------------------: | :---------------------------: |
-| ZenNet-0.1ms |        77.8%         |            77.922%            |
-| ZenNet-0.8ms |        83.0%         |            83.214%            |
+|    dataset   | paper model params   |   paper model FLOPs   |     mAP        |
+| :----------: | :------------------: | :-------------------: |:---------------|
+|  VisDrone    |        6.61M         |       11.20M          |    14.92%      |
+| UAV-OUC-DET  |        6.61M         |       11.20M          |    8.38%       |
 
-Note that the same results can be obtained with Horovod, but we took more time to complete the training.
-So we recommend using apex for distributed training.
 
-Before the code was released, we reproduced the paper algorithm and searched the model according to the paper's conditions.
-The following table shows the comparison results between the search model and the paper model.
-
-|             | paper accuracy | searched model accuracy |
-| :---------: | :------------: | :---------------------: |
-| latency01ms |     77.8%      |         78.622%         |
-| latency05ms |     82.7%      |         82.752%         |
-| latency12ms |     83.6%      |         83.466%         |
 
 For proving the effectiveness of the algorithm, we experimented with several different model searches
 and get the following result.
@@ -57,7 +47,7 @@ We use a single Tesla V100 GPU to evolve the population 50000 times.
 
 ### System Requirements
 
-- PyTorch >= 1.6, Python >= 3.7
+- PyTorch = 1.8.0, Python = 3.7.9, CUDA=10.2
 - By default, ImageNet dataset is stored under \~/data/imagenet;
 CIFAR-10/CIFAR-100 is stored under \~/data/pytorch\_cifar10 or \~/data/pytorch\_cifar100
 - Pre-trained parameters are cached under \~/.cache/pytorch/checkpoints/zennet\_pretrained
@@ -65,13 +55,10 @@ CIFAR-10/CIFAR-100 is stored under \~/data/pytorch\_cifar10 or \~/data/pytorch\_
 ### Package Requirements
 
 - ptflops
+- opencv = 4.50 
+- torchvision = 0.9.0
 - tensorboard >= 1.15 (optional)
 - apex
-
-### Pre-trained model download
-
-If you want to evaluate pre-trained models,
-please go to [ZenNAS](https://github.com/idstcv/ZenNAS) to download the pre-trained model.
 
 ### Evaluate pre-trained models on ImageNet and CIFAR-10/100
 
@@ -137,26 +124,6 @@ scripts/TE_NAS_cifar_params1M.sh
 scripts/Zen_NAS_cifar_params1M.sh
 ```
 
-### Searching on ImageNet
-
-Searching for ImageNet models, with latency budget on NVIDIA V100 from 0.1 ms/image to 1.2 ms/image at batch size 64 FP16:
-
-```bash
-scripts/Zen_NAS_ImageNet_latency0.1ms.sh
-scripts/Zen_NAS_ImageNet_latency0.2ms.sh
-scripts/Zen_NAS_ImageNet_latency0.3ms.sh
-scripts/Zen_NAS_ImageNet_latency0.5ms.sh
-scripts/Zen_NAS_ImageNet_latency0.8ms.sh
-scripts/Zen_NAS_ImageNet_latency1.2ms.sh
-```
-
-Searching for ImageNet models, with FLOPs budget from 400M to 800M:
-
-``` bash
-scripts/Zen_NAS_ImageNet_flops400M.sh
-scripts/Zen_NAS_ImageNet_flops600M.sh
-scripts/Zen_NAS_ImageNet_flops800M.sh
-```
 
 ## Customize Your Own Search Space and Zero-Shot Proxy
 
@@ -203,18 +170,6 @@ The zero-shot proxies are implemented in "ZeroShotProxy/*.py". The evolutionary 
 "train_image_classification.py" implements SGD gradient training
 and "ts_train_image_classification.py" implements teacher-student distillation.
 
-## Open Source
-
-A few files in this repository are modified from the following open-source implementations:
-
-```text
-https://github.com/DeepVoltaire/AutoAugment/blob/master/autoaugment.py
-https://github.com/VITA-Group/TENAS
-https://github.com/SamsungLabs/zero-cost-nas
-https://github.com/BayesWatch/nas-without-training
-https://github.com/rwightman/gen-efficientnet-pytorch
-https://pytorch.org/vision/0.8/_modules/torchvision/models/resnet.html
-```
 
 ## Copyright
 

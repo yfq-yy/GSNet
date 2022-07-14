@@ -75,7 +75,4 @@ model = model.half()
 model.eval()
 
 
-### Copyright
-
-Copyright 2021 ZTE corporation. All Rights Reserved.
-
+### 

@@ -73,42 +73,7 @@ torch.backends.cudnn.benchmark = True
 model = model.cuda(gpu)
 model = model.half()
 model.eval()
-```
 
-### usage
-
-We supply apex and Horovod distributed training scripts, you can modify other original scripts based on these scripts.
-apex script:
-
-```bash
-scripts/Zen_NAS_ImageNet_latency0.1ms_train_apex.sh
-```
-
-Horovod script:
-
-```bash
-scripts/Zen_NAS_ImageNet_latency0.1ms_train.sh
-```
-
-If you want to search model, please notice the choices "--fix_initialize" and "--origin".
-"--fix_initialize" decides how to initialize population, the algorithm default choice is random initialization.
-"--origin" determines how the mutation model is generated.  
-When specified "--origin", the mutated model will be produced using the original method.
-
-### Searching on CIFAR-10/100
-
-Searching for CIFAR-10/100 models with budget params < 1M, using different zero-shot proxies:
-
-```bash
-scripts/Flops_NAS_cifar_params1M.sh
-scripts/GradNorm_NAS_cifar_params1M.sh
-scripts/NASWOT_NAS_cifar_params1M.sh
-scripts/Params_NAS_cifar_params1M.sh
-scripts/Random_NAS_cifar_params1M.sh
-scripts/Syncflow_NAS_cifar_params1M.sh
-scripts/TE_NAS_cifar_params1M.sh
-scripts/Zen_NAS_cifar_params1M.sh
-```
 
 ### Copyright
 

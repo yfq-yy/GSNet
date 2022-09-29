@@ -62,7 +62,7 @@ To evaluate the pre-trained model on CIFAR-10 or CIFAR-100 using GPU 0:
 ``` bash
 python val_cifar.py --dataset cifar10 --gpu 0 --arch ${zennet_model_name}
 ```
-To create a ZenNet in your python code:
+### To create a ZenNet in your python code:
 
 gpu=0
 model = ZenNet.get_ZenNet(opt.arch, pretrained=True)
@@ -71,7 +71,7 @@ torch.backends.cudnn.benchmark = True
 model = model.cuda(gpu)
 model = model.half()
 model.eval()
-Searching on CIFAR-10/100
+### Searching on CIFAR-10/100
 Searching for CIFAR-10/100 models with budget params < 1M , using different zero-shot proxies:
 
 '''bash scripts/Flops_NAS_cifar_params1M.sh scripts/GradNorm_NAS_cifar_params1M.sh scripts/NASWOT_NAS_cifar_params1M.sh scripts/Params_NAS_cifar_params1M.sh scripts/Random_NAS_cifar_params1M.sh scripts/Syncflow_NAS_cifar_params1M.sh scripts/TE_NAS_cifar_params1M.sh scripts/Zen_NAS_cifar_params1M.sh '''

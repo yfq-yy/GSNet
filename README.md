@@ -62,17 +62,3 @@ To evaluate the pre-trained model on CIFAR-10 or CIFAR-100 using GPU 0:
 ``` bash
 python val_cifar.py --dataset cifar10 --gpu 0 --arch ${zennet_model_name}
 ```
-
-To create a ZenNet in your python code:
-
-``` python
-gpu=0
-model = ZenNet.get_ZenNet(opt.arch, pretrained=True)
-torch.cuda.set_device(gpu)
-torch.backends.cudnn.benchmark = True
-model = model.cuda(gpu)
-model = model.half()
-model.eval()
-
-
-### 

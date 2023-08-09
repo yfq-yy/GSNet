@@ -50,8 +50,9 @@ CIFAR-10/CIFAR-100 is stored under \~/data/pytorch\_cifar10 or \~/data/pytorch\_
 
 To evaluate the pre-trained model on ImageNet using GPU 0:
 
+cd GSNet/src/zen_nas/
 ``` bash
-python val.py --fp16 --gpu 0 --arch ${zennet_model_name}
+python test.py --fp16 --gpu 0 --arch ${zennet_model_name}
 ```
 
 where ${zennet\_model\_name} should be replaced by a valid ZenNet model name.
@@ -60,7 +61,7 @@ The complete list of model names can be found in the 'Pre-trained Models' sectio
 To evaluate the pre-trained model on CIFAR-10 or CIFAR-100 using GPU 0:
 
 ``` bash
-python val_cifar.py --dataset cifar10 --gpu 0 --arch ${zennet_model_name}
+python test_cifar.py --dataset cifar10 --gpu 0 --arch ${zennet_model_name}
 ```
 ### To create a ZenNet in your python code:
 
@@ -75,3 +76,5 @@ model.eval()
 Searching for CIFAR-10/100 models with budget params < 1M , using different zero-shot proxies:
 
 '''bash scripts/Flops_NAS_cifar_params1M.sh scripts/GradNorm_NAS_cifar_params1M.sh scripts/NASWOT_NAS_cifar_params1M.sh scripts/Params_NAS_cifar_params1M.sh scripts/Random_NAS_cifar_params1M.sh scripts/Syncflow_NAS_cifar_params1M.sh scripts/TE_NAS_cifar_params1M.sh scripts/Zen_NAS_cifar_params1M.sh '''
+### Designing the object detection network, GSNet.
+After the search stage, we got the structure of backbone. According to the result, we can modify the backbone based on nanodet.
